@@ -1,3 +1,24 @@
+FROM php:7.3.2-cli-alpine3.9
+
+ADD https://raw.githubusercontent.com/composer/getcomposer.org/cb19f2aa3aeaa2006c0cd69a7ef011eb31463067/web/installer composer-installer
+RUN php composer-installer --install-dir=/usr/local/bin --filename=composer
+
+RUN mkdir /build
+WORKDIR /build
+ADD app/ /build/
+RUN rm -rf var vendor && \
+    #We need this because of https://forums.aws.amazon.com/thread.jspa?threadID=235452
+    chmod +x bin/console && \
+    COMPOSER_ALLOW_SUPERUSER=1 composer install --dev && \
+    rm -rf var && \
+    bin/console cache:warmup --env=dev && \
+    \
+    COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev && \
+    rm -rf var && \
+    bin/console cache:warmup --env=prod && \
+    mkdir out && \
+    cp -r .env config public src var vendor out
+
 FROM php:7.3.2-fpm-alpine3.9
 
 ENTRYPOINT ["/sbin/tini"]
