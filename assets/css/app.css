@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Raleway'), local('Raleway-Regular'),
+    url('/assets/fonts/raleway-v13-latin/raleway-v13-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/raleway-v13-latin/raleway-v13-latin-regular.woff') format('woff');
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+main {
+    width: 1140px;
+    margin: 0 auto;
+}
+.posts {
+    padding: 0;
+}
+
+.post {
+    list-style: none;
+}
