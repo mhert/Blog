@@ -1,0 +1,16 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/localheinz/phpstan-rules/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+parameters:
+    symfony:
+        container_xml_path: '%rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml'
+
+    paths:
+        - src
+        - tests
+    excludes_analyse:
+        - %currentWorkingDirectory%/src/Kernel.php
+
+    level: max
