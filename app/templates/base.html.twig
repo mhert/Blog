@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Mathias' Blog{% endblock %}</title>
+        <link href="{{ asset('app.css', 'css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <h1>Mathias' Blog</h1>
+        {% block body %}{% endblock %}
+        </main>
+        <script src="{{ asset('app.js', 'js') }}" type="application/ecmascript"></script>
+    </body>
+</html>

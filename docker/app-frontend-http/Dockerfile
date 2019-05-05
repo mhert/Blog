@@ -9,3 +9,4 @@ RUN apk add --no-cache \
 RUN mkdir -p /var/www/html/public
 
 COPY docker/app-frontend-http/conf/etc /etc
+COPY assets /var/www/html/public/assets

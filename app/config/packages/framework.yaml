@@ -15,3 +15,12 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    assets:
+        packages:
+            css:
+                base_path: assets/css/
+            fonts:
+                base_path: assets/fonts/
+            js:
+                base_path: assets/js/

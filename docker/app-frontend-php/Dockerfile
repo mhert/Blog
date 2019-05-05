@@ -9,7 +9,7 @@ ADD app/ /build/
 RUN rm -rf var vendor && \
     #We need this because of https://forums.aws.amazon.com/thread.jspa?threadID=235452
     chmod +x bin/console && \
-    COMPOSER_ALLOW_SUPERUSER=1 composer install --dev && \
+    COMPOSER_ALLOW_SUPERUSER=1 composer install --dev --ignore-platform-reqs  && \
     rm -rf var && \
     bin/console cache:warmup --env=dev && \
     \
