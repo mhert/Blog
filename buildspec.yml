@@ -11,7 +11,7 @@ phases:
   build:
     commands:
       - docker build -t blog-app-frontend-http:$IMAGE_TAG -f docker/app-frontend-http/Dockerfile .
-      - docker build -t blog-app-frontend-php:$IMAGE_TAG -f docker/app-frontend-http/Dockerfile .
+      - docker build -t blog-app-frontend-php:$IMAGE_TAG -f docker/app-frontend-php/Dockerfile .
   post_build:
     commands:
       - APP_FRONTEND_HTTP_IMAGE=$REGISTRY/blog-app-frontend-http
