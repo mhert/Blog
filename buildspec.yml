@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+
+      - REGISTRY=489249879193.dkr.ecr.eu-central-1.amazonaws.com
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+  build:
+    commands:
+      - docker build -t blog-app-frontend-http:$IMAGE_TAG -f docker/app-frontend-http/Dockerfile .
+      - docker build -t blog-app-frontend-php:$IMAGE_TAG -f docker/app-frontend-http/Dockerfile .
+  post_build:
+    commands:
+      - APP_FRONTEND_HTTP_IMAGE=$REGISTRY/blog-app-frontend-http
+      - APP_FRONTEND_PHP_IMAGE=$REGISTRY/blog-app-frontend-php
+
+      - docker tag blog-app-frontend-http:$IMAGE_TAG $APP_FRONTEND_HTTP_IMAGE:$IMAGE_TAG
+      - docker push $APP_FRONTEND_HTTP_IMAGE:$IMAGE_TAG
+      - docker tag blog-app-frontend-http:$IMAGE_TAG $APP_FRONTEND_HTTP_IMAGE:latest
+      - docker push $APP_FRONTEND_HTTP_IMAGE:latest
+
+      - docker tag blog-app-frontend-php:$IMAGE_TAG $APP_FRONTEND_PHP_IMAGE:$IMAGE_TAG
+      - docker push $APP_FRONTEND_PHP_IMAGE:$IMAGE_TAG
+      - docker tag blog-app-frontend-php:$IMAGE_TAG $APP_FRONTEND_PHP_IMAGE:latest
+      - docker push $APP_FRONTEND_PHP_IMAGE:latest
+
+      - printf '[{"name":"%s","imageUri":"%s"},{"name":"%s","imageUri":"%s"},{"name":"%s","imageUri":"%s"},{"name":"%s","imageUri":"%s"}]' blog-app-frontend-http $APP_FRONTEND_HTTP_IMAGE:$IMAGE_TAG blog-app-frontend-http-latest $APP_FRONTEND_HTTP_IMAGE:latest blog-app-frontend-php $APP_FRONTEND_PHP_IMAGE:$IMAGE_TAG blog-app-frontend-php-latest $APP_FRONTEND_PHP_IMAGE:latest > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
