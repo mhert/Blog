@@ -1,0 +1,52 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "blog-app-frontend-http",
+      "image": "489249879193.dkr.ecr.eu-central-1.amazonaws.com/blog-app-frontend-http:latest",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "links": [
+        "blog-app-frontend-php"
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/blog",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    },
+    {
+      "name": "blog-app-frontend-php",
+      "image": "489249879193.dkr.ecr.eu-central-1.amazonaws.com/blog-app-frontend-php:latest",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "containerPort": 9000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment" : [
+        { "name" : "APP_ENV", "value" : "prod" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/blog",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  blog-app-frontend-http:
+    image: blog-app-frontend-http:latest
+    volumes:
+      - ./assets/:/var/www/html/public/assets/
+    links:
+      - blog-app-frontend-php
+
+  blog-app-frontend-php:
+    image: blog-app-frontend-php:latest
+    volumes:
+      - ./app/:/var/www/html/
+    environment:
+      APP_ENV: dev
+    user: 1000:1000
