@@ -13,6 +13,8 @@ RUN rm -rf var vendor && \
     rm -rf var && \
     bin/console cache:warmup --env=dev && \
     \
+    vendor/bin/phing check test && \
+    \
     COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev && \
     rm -rf var && \
     bin/console cache:warmup --env=prod && \

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model xlink:href="/usr/share/php5/PEAR/data/phing/etc/phing-grammar.rng"
+        type="application/xml"
+        schematypens="http://relaxng.org/ns/structure/1.0" ?>
+
+<project name="Blog" default="check">
+    <target name="check">
+        <echo msg="vendor/bin/parallel-lint..." />
+        <exec executable="vendor/bin/parallel-lint" passthru="true" dir="./">
+            <arg value="--exclude"/>
+            <arg value="vendor"/>
+            <arg value="."/>
+        </exec>
+        <echo msg="vendor/bin/phpcs..." />
+        <exec executable="vendor/bin/phpcs" passthru="true" dir="./">
+            <arg value="--standard=phpcs.xml.dist"/>
+            <arg value="-v"/>
+            <arg value="src"/>
+            <arg value="tests"/>
+        </exec>
+        <echo msg="vendor/bin/phpstan..." />
+        <exec executable="vendor/bin/phpstan" passthru="true" dir="./">
+            <arg value="analyse"/>
+            <arg value="-c"/>
+            <arg value="phpstan.neon.dist"/>
+        </exec>
+    </target>
+
+    <target name="fix">
+        <echo msg="vendor/bin/phpcbf..." />
+        <exec executable="vendor/bin/phpcbf" passthru="true" dir="./">
+            <arg value="--standard=phpcs.xml.dist"/>
+            <arg value="-v"/>
+            <arg value="src"/>
+            <arg value="tests"/>
+        </exec>
+    </target>
+
+    <target name="test">
+        <echo msg="vendor/bin/simple-phpunit..." />
+        <exec executable="vendor/bin/simple-phpunit" passthru="true" dir="./">
+            <arg value="-c"/>
+            <arg value="phpunit.xml.dist"/>
+        </exec>
+    </target>
+</project>

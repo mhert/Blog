@@ -14,6 +14,9 @@
     "localheinz/phpstan-rules": {
         "version": "0.8.1"
     },
+    "mehr-als-nix/parallel": {
+        "version": "v1.0.0"
+    },
     "nette/bootstrap": {
         "version": "v3.0.0"
     },
@@ -44,6 +47,9 @@
     "ocramius/package-versions": {
         "version": "1.4.0"
     },
+    "phing/phing": {
+        "version": "3.0.0-alpha2"
+    },
     "phpstan/phpdoc-parser": {
         "version": "0.3.3"
     },
@@ -70,6 +76,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "sebastian/version": {
+        "version": "2.0.1"
     },
     "slevomat/coding-standard": {
         "version": "5.0.4"
