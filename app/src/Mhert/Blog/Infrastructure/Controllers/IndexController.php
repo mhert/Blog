@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace App\Controllers;
+namespace Mhert\Blog\Infrastructure\Controllers;
 
-use App\Views\PostsViewHtml;
-use App\Views\Post;
 use DateTimeImmutable;
+use Mhert\Blog\Infrastructure\Views\Post;
+use Mhert\Blog\Infrastructure\Views\PostsViewHtml;
 use Symfony\Component\HttpFoundation\Response;
 
 final class IndexController

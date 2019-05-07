@@ -5,13 +5,13 @@ includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
 parameters:
     symfony:
-        container_xml_path: '%rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml'
+        container_xml_path: '%rootDir%/../../../var/cache/dev/InfrastructureMhert_Blog_Infrastructure_KernelDevDebugContainer.xml'
 
     paths:
         - src
         - tests
     excludes_analyse:
-        - %currentWorkingDirectory%/src/Kernel.php
-        - %currentWorkingDirectory%/src/ParsedownMarkdownParser.php
+        - %currentWorkingDirectory%/src/Mhert/Blog/Infrastructure/Kernel.php
+        - %currentWorkingDirectory%/src/Mhert/Blog/Infrastructure/ParsedownMarkdownParser.php
 
     level: max

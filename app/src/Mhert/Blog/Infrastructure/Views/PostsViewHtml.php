@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace App\Views;
+namespace Mhert\Blog\Infrastructure\Views;
 
 use DateTimeInterface;
-use App\ParsedownMarkdownParser;
+use Mhert\Blog\Infrastructure\ParsedownMarkdownParser;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as TwigEnvironment;
 

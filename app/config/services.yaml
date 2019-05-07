@@ -13,14 +13,14 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
+    Mhert\Blog\:
+        resource: '../src/Mhert/Blog/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controllers\:
-        resource: '../src/Controllers'
+    Mhert\Blog\Infrastructure\Controllers\:
+        resource: '../src/Mhert/Blog/Infrastructure/Controllers'
         tags: ['controller.service_arguments']
 
     Parsedown:

@@ -54,12 +54,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Mhert\\Blog\\": "src/Mhert/Blog/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Mhert\\Blog\\Tests\\": "tests/Mhert/Blog/Tests/"
         }
     },
     "scripts": {

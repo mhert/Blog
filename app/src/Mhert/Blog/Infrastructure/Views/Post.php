@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Views;
+namespace Mhert\Blog\Infrastructure\Views;
 
 use DateTimeInterface;
 
