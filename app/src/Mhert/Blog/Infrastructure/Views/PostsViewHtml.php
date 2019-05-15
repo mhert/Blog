@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace Mhert\Blog\Infrastructure\Views;
 
 use DateTimeInterface;
+use Mhert\Blog\Domain\Frontpage\Post\Post;
 use Mhert\Blog\Infrastructure\ParsedownMarkdownParser;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as TwigEnvironment;
 
@@ -27,7 +29,7 @@ final class PostsViewHtml
     /**
      * @param Post[] $posts
      */
-    public function render(array $posts): Response
+    public function render(iterable $posts): Response
     {
         $page = [
             'posts' => $this->adjustPosts($posts)
@@ -42,13 +44,29 @@ final class PostsViewHtml
      * @param Post[] $posts
      * @return mixed[]
      */
-    private function adjustPosts(array $posts): array
+    private function adjustPosts(iterable $posts): iterable
     {
-        return array_map(function (Post $post): array {
-            return [
-                'content' => $this->markdownParser->parse($post->content()),
-                'created' => $post->created()->format(DateTimeInterface::ISO8601),
-            ];
-        }, $posts);
+        foreach ($posts as $post) {
+            $result = [];
+
+            $post->print(
+                function (
+                    UuidInterface $id,
+                    DateTimeInterface $created,
+                    string $content
+                ) use (
+                    &$result
+                ): void {
+                    $result = [
+                        'content' => $this->markdownParser->parse($content),
+                        'created' => $created->format(DateTimeInterface::ISO8601),
+                    ];
+                }
+            );
+
+            return yield $result;
+        }
+
+        return [];
     }
 }

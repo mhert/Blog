@@ -80,6 +80,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "ramsey/uuid": {
+        "version": "3.8.0"
+    },
     "sebastian/version": {
         "version": "2.0.1"
     },
