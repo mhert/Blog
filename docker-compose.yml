@@ -23,6 +23,23 @@ services:
     links:
       - db
 
+  blog-app-db-migrations:
+    image: blog-app-frontend-php:latest
+    command: ["/var/www/html/bin/migrate"]
+    volumes:
+      - ./app/:/var/www/html/
+    environment:
+      APP_ENV: dev
+      RDS_HOSTNAME: db
+      RDS_PORT: 5432
+      RDS_DB_NAME: example
+      RDS_PASSWORD: example
+      RDS_USERNAME: example
+    user: 1000:1000
+    links:
+      - db
+    restart: "no"
+
   db:
     image: postgres
     restart: always

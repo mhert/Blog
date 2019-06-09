@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+echo "Install" . PHP_EOL;
+
+$application = new Application();
+$application->setAutoExit(false);
+$application->add(new \ByJG\DbMigration\Console\InstallCommand());
+$application->run(new ArgvInput([
+    __FILE__,
+    'install',
+    '-v',
+    sprintf('--path=%s',dirname(__DIR__) . '/migrations'),
+    sprintf('pgsql://%s:%s@%s:%s/%s', $_ENV['RDS_USERNAME'], $_ENV['RDS_PASSWORD'], $_ENV['RDS_HOSTNAME'], $_ENV['RDS_PORT'], $_ENV['RDS_DB_NAME']),
+]));
+
+echo "Up" . PHP_EOL;
+
+$application = new Application();
+$application->setAutoExit(false);
+$application->add(new \ByJG\DbMigration\Console\UpCommand());
+$application->run(new ArgvInput([
+    __FILE__,
+    'up',
+    '-v',
+    sprintf('--path=%s',dirname(__DIR__) . '/migrations'),
+    sprintf('pgsql://%s:%s@%s:%s/%s', $_ENV['RDS_USERNAME'], $_ENV['RDS_PASSWORD'], $_ENV['RDS_HOSTNAME'], $_ENV['RDS_PORT'], $_ENV['RDS_DB_NAME']),
+]));
