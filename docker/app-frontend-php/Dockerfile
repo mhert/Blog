@@ -25,9 +25,9 @@ ENTRYPOINT ["/sbin/tini"]
 CMD ["/usr/local/sbin/php-fpm"]
 
 RUN apk add --no-cache tini && \
-    apk add --no-cache libzip && \
-    apk add --no-cache --virtual .deps $PHPIZE_DEPS libzip-dev && \
-    docker-php-ext-install -j$(nproc) opcache zip bcmath && \
+    apk add --no-cache libzip postgresql-libs && \
+    apk add --no-cache --virtual .deps $PHPIZE_DEPS libzip-dev postgresql-dev && \
+    docker-php-ext-install -j$(nproc) opcache zip bcmath pdo_pgsql && \
     apk del .deps
 
 COPY --from=0 /build /build
