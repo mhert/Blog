@@ -17,10 +17,12 @@
 
     <arg name="tab-width" value="4"/>
     <config name="installed_paths" value="../../slevomat/coding-standard"/><!-- relative path from PHPCS source location -->
+
     <rule ref="vendor/squizlabs/php_codesniffer/src/Standards/PSR12/ruleset.xml">
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed"/>
         <exclude name="Squiz.WhiteSpace.FunctionSpacing.Before"/>
     </rule>
+
     <!-- https://github.com/slevomat/coding-standard/blob/8e511cf2422682e1f57cb61f60684e87f3d6a343/README.md#how-to-run-the-sniffs -->
     <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration"/>
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
@@ -39,5 +41,29 @@
     <rule ref="SlevomatCodingStandard.Functions.StaticClosure"/>
     <rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
     <rule ref="SlevomatCodingStandard.Operators.RequireCombinedAssignmentOperator"/>
+
+	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses">
+		<properties>
+			<property name="psr12Compatible" value="true"/>
+		</properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+		<properties>
+			<property name="searchAnnotations" value="true"/>
+		</properties>
+    </rule>
+	<rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+		<properties>
+			<property name="searchAnnotations" value="true"/>
+			<property name="fullyQualifiedKeywords" type="array"/>
+			<property name="allowFallbackGlobalFunctions" value="false"/>
+			<property name="allowFallbackGlobalConstants" value="false"/>
+			<property name="allowFullyQualifiedExceptions" value="false"/>
+			<property name="allowFullyQualifiedNameForCollidingClasses" value="true"/>
+			<property name="allowFullyQualifiedNameForCollidingFunctions" value="true"/>
+			<property name="allowFullyQualifiedNameForCollidingConstants" value="true"/>
+			<property name="allowPartialUses" value="false"/>
+		</properties>
+    </rule>
 </ruleset>
