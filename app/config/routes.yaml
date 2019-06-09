@@ -1,3 +1,7 @@
 index:
   path: /
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostsController::action
+
+post:
+  path: /posts/{id}
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostController::action

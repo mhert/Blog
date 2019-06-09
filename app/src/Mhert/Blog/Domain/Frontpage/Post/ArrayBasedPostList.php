@@ -7,7 +7,7 @@ namespace Mhert\Blog\Domain\Frontpage\Post;
 use Iterator;
 use function array_key_exists;
 
-final class ArrayPostList implements Iterator, PostList
+final class ArrayBasedPostList implements Iterator, PostList
 {
     /** @var int */
     private $position = 0;
