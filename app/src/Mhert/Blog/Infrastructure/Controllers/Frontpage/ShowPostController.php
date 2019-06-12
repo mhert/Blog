@@ -6,8 +6,9 @@ namespace Mhert\Blog\Infrastructure\Controllers\Frontpage;
 
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
 use Mhert\Blog\Infrastructure\Views\PostViewHtml;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpFoundation\Response;
 
 final class ShowPostController
 {
@@ -22,7 +23,7 @@ final class ShowPostController
         $this->postRepository = $postRepository;
     }
 
-    public function action(string $id): Response
+    public function action(ServerRequestInterface $request, string $id): ResponseInterface
     {
         $id = Uuid::fromString($id);
 

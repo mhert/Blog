@@ -6,7 +6,8 @@ namespace Mhert\Blog\Infrastructure\Controllers\Frontpage;
 
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
 use Mhert\Blog\Infrastructure\Views\PostsViewHtml;
-use Symfony\Component\HttpFoundation\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class ShowPostsController
 {
@@ -21,7 +22,7 @@ final class ShowPostsController
         $this->postRepository = $postRepository;
     }
 
-    public function action(): Response
+    public function action(ServerRequestInterface $request): ResponseInterface
     {
         return $this->view->render(
             $this->postRepository->findPostsByOffset(0, 10)

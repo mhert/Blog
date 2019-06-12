@@ -10,15 +10,19 @@
         "ext-pdo": "*",
         "byjg/migration-cli": "4.0.*",
         "erusev/parsedown": "^1.7",
+        "nyholm/psr7": "^1.1",
         "ramsey/uuid": "^3.8",
+        "sensio/framework-extra-bundle": "^5.3",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/psr-http-message-bridge": "^1.2",
         "symfony/twig-bridge": "4.2.*",
         "symfony/twig-bundle": "4.2.*",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "4.2.*",
+        "teapot/status-code": "^1.1"
     },
     "replace": {
         "paragonie/random_compat": "2.*",
