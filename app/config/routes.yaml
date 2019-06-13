@@ -5,3 +5,11 @@ index:
 post:
   path: /posts/{id}
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostController::action
+
+imprint-en:
+  path: /imprint
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ImprintEnController::action
+
+imprint-de:
+  path: /impressum
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ImprintDeController::action
