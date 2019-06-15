@@ -8,7 +8,7 @@ use Mhert\Blog\Infrastructure\Views\ImprintViewHtml;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class ImprintEnController
+final class ShowImprintEnController
 {
     /** @var ImprintViewHtml */
     private $view;

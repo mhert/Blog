@@ -9,11 +9,24 @@
 
 body {
     font-family: 'Raleway', sans-serif;
-}
-main {
     width: 1140px;
     margin: 0 auto;
 }
+
+.nav-items {
+    padding: 0;
+}
+
+.nav-item {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item:not(:last-child) {
+    float: left;
+    margin-right: 10px;
+}
+
 .posts {
     padding: 0;
 }

@@ -1,5 +1,12 @@
 index:
   path: /
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /posts
+    permanent: true
+
+posts:
+  path: /posts
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostsController::action
 
 post:
@@ -8,8 +15,8 @@ post:
 
 imprint-en:
   path: /imprint
-  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ImprintEnController::action
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowImprintEnController::action
 
 imprint-de:
   path: /impressum
-  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ImprintDeController::action
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowImprintDeController::action

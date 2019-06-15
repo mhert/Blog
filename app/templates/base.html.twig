@@ -6,8 +6,16 @@
         <link href="{{ asset('app.css', 'css') }}" rel="stylesheet">
     </head>
     <body>
-        <main>
+        <header>
             <h1>Mathias' Blog</h1>
+            <nav>
+                <ul class="nav-items">
+                    <li class="nav-item"><a href="/posts">Posts</a></li>
+                    <li class="nav-item"><a href="/imprint">Imprint</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
         {% block body %}{% endblock %}
         </main>
         <script src="{{ asset('app.js', 'js') }}" type="application/ecmascript"></script>
