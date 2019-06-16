@@ -4,7 +4,6 @@
     <ul class="posts">
         {% for post in page.posts %}
             <li class="post">
-                {{ post.created }}
                 {{ post.content | raw }}
             </li>
         {% endfor %}

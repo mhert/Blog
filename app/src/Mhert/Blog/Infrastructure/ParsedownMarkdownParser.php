@@ -11,13 +11,13 @@ final class ParsedownMarkdownParser extends Parsedown
     protected function blockHeader($Line)
     {
         if (isset($Line['text'][1])) {
-            $level = 2;
+            $level = 1;
 
-            while (isset($Line['text'][$level]) and $Line['text'][$level] === '#') {
+            while (isset($Line['text'][$level]) && $Line['text'][$level] === '#') {
                 $level++;
             }
 
-            if ($level > 6) {
+            if ($level > 3) {
                 return;
             }
 
@@ -25,7 +25,7 @@ final class ParsedownMarkdownParser extends Parsedown
 
             $Block = array(
                 'element' => array(
-                    'name' => 'h' . min(6, $level),
+                    'name' => 'h' . min(3, $level + 1),
                     'text' => $text,
                     'handler' => 'line',
                 ),

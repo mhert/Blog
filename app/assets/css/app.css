@@ -7,14 +7,47 @@
     url('/assets/fonts/raleway-v13-latin/raleway-v13-latin-regular.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Inconsolata';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Inconsolata'), local('Inconsolata-Regular'),
+    url('/assets/fonts/inconsolata-v13-latin/inconsolata-v13-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/inconsolata-v13-latin/inconsolata-v13-latin-regular.woff') format('woff');
+}
+
+
+/** Reset **/
+* {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    color: black;
+}
+
+ol, ul {
+    list-style: none;
+}
+
 body {
     font-family: 'Raleway', sans-serif;
-    width: 1140px;
+    max-width: 90rem;
     margin: 0 auto;
+}
+
+code {
+    font-family: 'Inconsolata', monospace;
+}
+
+/** Layout **/
+
+.title {
+    margin-bottom: 5px;
 }
 
 .nav-items {
     padding: 0;
+    margin: 0;
 }
 
 .nav-item {
@@ -24,13 +57,127 @@ body {
 
 .nav-item:not(:last-child) {
     float: left;
-    margin-right: 10px;
+    margin-right: 1rem;
+}
+
+.nav-item a {
+    color: black;
+    text-decoration: underline;
+}
+
+.nav-item a:visited {
+    color: black;
+    text-decoration: underline;
 }
 
 .posts {
     padding: 0;
+    margin: 0;
+}
+
+.post:not(:first-child) {
+    margin-top: 2rem;
+    border-top: 1px solid gray;
+}
+
+/** Format **/
+
+body {
+    line-height: 1.5;
+    padding: 1rem;
+}
+
+h2, h3, h4, p, img, blockquote, pre, ul, ol, dl, dir, hr {
+    margin-top: 1rem
+}
+
+blockquote {
+    padding-left: 1rem;
+}
+
+pre {
+    display: block;
+    border: 1px solid gray;
+    padding: 0.5rem;
 }
 
 .post {
     list-style: none;
+}
+
+
+ol, ul {
+    padding-left: 1.875rem
+}
+
+ol {
+    list-style: decimal;
+}
+
+ul {
+    list-style: disc;
+}
+
+.title {
+    font-size: 1rem;
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+}
+
+h4 {
+    font-size: 1.375rem;
+}
+
+p, img, blockquote, pre, ul, ol, dl, dir, hr {
+    font-size: 1rem;
+}
+
+@media only screen and (min-width: 48em) {
+    .title {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 3rem
+    }
+
+    h3 {
+        font-size: 1.75rem
+    }
+
+    h4 {
+        font-size: 1.5rem
+    }
+
+    p, img, blockquote, pre, ul, ol, dl, dir, hr {
+        font-size: 1.25rem;
+    }
+}
+
+@media only screen and (min-width: 78em) {
+    .title {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 4.375rem
+    }
+
+    h3 {
+        font-size: 2.25rem
+    }
+
+    h4 {
+        font-size: 1.75rem
+    }
+
+    p, img, blockquote, pre, ul, ol, dl, dir, hr {
+        font-size: 1.25rem;
+    }
 }
