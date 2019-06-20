@@ -2,14 +2,18 @@ version: "3.7"
 
 services:
   blog-app-frontend-http:
-    image: blog-app-frontend-http:latest
+    build:
+      context: .
+      dockerfile: docker/app-frontend-http/Dockerfile
     volumes:
       - ./app/assets/:/var/www/html/public/assets/
     links:
       - blog-app-frontend-php
 
   blog-app-frontend-php:
-    image: blog-app-frontend-php:latest
+    build:
+      context: .
+      dockerfile: docker/app-frontend-php/Dockerfile
     volumes:
       - ./app/:/var/www/html/
     environment:
@@ -24,7 +28,9 @@ services:
       - db
 
   blog-app-db-migrations:
-    image: blog-app-frontend-php:latest
+    build:
+      context: .
+      dockerfile: docker/app-frontend-php/Dockerfile
     command: ["/var/www/html/bin/migrate"]
     volumes:
       - ./app/:/var/www/html/
