@@ -17,7 +17,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     PDO:
-        class: \PDO
+        class: PDO
         arguments:
             $dsn: 'pgsql:host=%db_host%;port=%db_port%;dbname=%db_name%'
             $username: '%db_user%'

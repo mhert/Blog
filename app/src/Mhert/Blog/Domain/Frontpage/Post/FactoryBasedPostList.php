@@ -20,7 +20,7 @@ final class FactoryBasedPostList implements IteratorAggregate, PostList
     public function getIterator(): Generator
     {
         while ($post = ($this->postFactory)()) {
-            return yield $post;
+            yield $post;
         }
     }
 }

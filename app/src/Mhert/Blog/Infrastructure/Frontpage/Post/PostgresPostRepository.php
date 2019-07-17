@@ -62,7 +62,7 @@ final class PostgresPostRepository implements PostRepository
     private static function postByResult(array $rawPost): Post
     {
         $id = Uuid::fromString($rawPost['id']);
-        $created = DateTimeImmutable::createFromFormat('Y-m-d H:i:s.u', $rawPost['created']);
+        $created = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $rawPost['created']);
         $content = $rawPost['content'];
 
         if (!$created instanceof DateTimeInterface) {

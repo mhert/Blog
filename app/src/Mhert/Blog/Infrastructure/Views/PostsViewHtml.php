@@ -59,9 +59,9 @@ final class PostsViewHtml
      */
     private function adjustPosts(iterable $posts): iterable
     {
-        foreach ($posts as $post) {
-            $result = [];
+        $result = [];
 
+        foreach ($posts as $post) {
             $post->print(
                 function (
                     UuidInterface $id,
@@ -70,16 +70,14 @@ final class PostsViewHtml
                 ) use (
                     &$result
                 ): void {
-                    $result = [
+                    $result[] = [
                         'content' => $this->markdownParser->parse($content),
-                        'created' => $created->format(DateTimeInterface::ISO8601),
+                        'created' => $created->format(DateTimeInterface::ATOM),
                     ];
                 }
             );
-
-            return yield $result;
         }
 
-        return [];
+        return $result;
     }
 }
