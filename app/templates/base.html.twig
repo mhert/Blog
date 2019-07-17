@@ -7,7 +7,7 @@
     </head>
     <body>
         <header>
-            <h1 class="title">Mathias' Blog</h1>
+            <p class="title">Mathias' Blog</p>
             <nav>
                 <ul class="nav-items">
                     <li class="nav-item"><a href="/posts">Posts</a></li>
@@ -16,7 +16,7 @@
             </nav>
         </header>
         <main>
-        {% block body %}{% endblock %}
+            {% block body %}{% endblock %}
         </main>
         <script src="{{ asset('app.js', 'js') }}" type="application/ecmascript"></script>
     </body>

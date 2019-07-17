@@ -12,52 +12,126 @@
     font-style: normal;
     font-weight: 400;
     src: local('Inconsolata'), local('Inconsolata-Regular'),
-    url('/assets/fonts/inconsolata-v13-latin/inconsolata-v13-latin-regular.woff2') format('woff2'),
-    url('/assets/fonts/inconsolata-v13-latin/inconsolata-v13-latin-regular.woff') format('woff');
+    url('/assets/fonts/inconsolata-v17-latin/inconsolata-v17-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/inconsolata-v17-latin/inconsolata-v17-latin-regular.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Noto Color Emoji';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Noto Color Emoji'),
+    url('/assets/fonts/noto-color-emoji/NotoColorEmoji.ttf') format('truetype');
+}
 
-/** Reset **/
-* {
+:root {
+    --font-plain: 'Raleway', 'Noto Color Emoji', sans-serif;
+    --font-mono: 'Inconsolata', 'Noto Color Emoji', monospace;
+    --color-dark: #050505;
+    --color-darkish: #404040;
+    --color-lightish: #fafafa;
+    --color-light: #ffffff;
+    --color-mid: grey;
+    --ratio: 1.2;
+    --s-5: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
+    --s-4: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio) / var(--ratio));
+    --s-3: calc(var(--s0) / var(--ratio) / var(--ratio) / var(--ratio));
+    --s-2: calc(var(--s0) / var(--ratio) / var(--ratio));
+    --s-1: calc(var(--s0) / var(--ratio));
+    --s0: 1rem;
+    --s1: calc(var(--s0) * var(--ratio));
+    --s2: calc(var(--s0) * var(--ratio) * var(--ratio));
+    --s3: calc(var(--s0) * var(--ratio) * var(--ratio) * var(--ratio));
+    --s4: calc(var(--s0) * var(--ratio) * var(--ratio) * var(--ratio) * var(--ratio));
+    --s5: calc(var(--s0) * var(--ratio) * var(--ratio) * var(--ratio) * var(--ratio) * var(--ratio));
+    --measure: 65ch;
+    --line-height: var(--ratio);
+    --line-height-small: calc(0.75 * var(--ratio));
+    --border-thin: var(--s-5);
+    --border-thick: var(--s-2);
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    background-color: inherit;
+    font-family: inherit;
+    color: inherit;
+    overflow-wrap: break-word;
     margin: 0;
     padding: 0;
-    max-width: 100%;
-    color: black;
+    border: none;
 }
 
-ol, ul {
-    list-style: none;
+footer, header, main, nav, pre {
+    display: block
 }
 
-body {
-    font-family: 'Raleway', sans-serif;
-    max-width: 90rem;
-    margin: 0 auto;
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth
+    }
 }
 
-code {
-    font-family: 'Inconsolata', monospace;
+[href]:hover {
+    text-decoration: none
+}
+
+:focus {
+    outline: none;
+    border: none;
+}
+
+/** Base **/
+
+:root {
+    line-height: var(--line-height);
+    font-size: calc(.333vw + 1em);
+    font-family: var(--font-plain);
+    background-color: var(--color-light);
+    color: var(--color-dark)
 }
 
 /** Layout **/
 
-.title {
-    margin-bottom: 5px;
+body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+header {
+    flex-basis: 15rem;
+    flex-grow: 1;
+    padding: var(--s3);
+}
+
+main {
+    flex-basis: 0;
+    flex-grow: 999;
+    padding: var(--s3);
 }
 
 .nav-items {
-    padding: 0;
-    margin: 0;
-}
-
-.nav-item {
-    list-style: none;
-    padding: 0;
+    margin-top: var(--s-5);
 }
 
 .nav-item:not(:last-child) {
     float: left;
     margin-right: 1rem;
+}
+
+.posts > * + * {
+    margin-top: var(--s1);
+}
+
+/** Style global **/
+
+.title {
+    font-size: var(--s3);
+}
+
+.nav-items {
+    list-style: none;
 }
 
 .nav-item a {
@@ -71,113 +145,69 @@ code {
 }
 
 .posts {
-    padding: 0;
-    margin: 0;
-}
-
-.post:not(:first-child) {
-    margin-top: 2rem;
-    border-top: 1px solid gray;
-}
-
-/** Format **/
-
-body {
-    line-height: 1.5;
-    padding: 1rem;
-}
-
-h2, h3, h4, p, img, blockquote, pre, ul, ol, dl, dir, hr {
-    margin-top: 1rem
-}
-
-blockquote {
-    padding-left: 1rem;
-}
-
-pre {
-    display: block;
-    border: 1px solid gray;
-    padding: 0.5rem;
-}
-
-.post {
     list-style: none;
 }
 
+.posts > * + * {
+    border-top: 1px solid var(--color-lightish);
+}
 
-ol, ul {
+/** Style .text **/
+
+.text h1 {
+    font-size: var(--s4);
+}
+
+.text h2 {
+    font-size: var(--s3);
+}
+
+.text h3 {
+    font-size: var(--s2);
+}
+
+.text h4 {
+    font-size: var(--s1);
+}
+
+.text p,
+.text img,
+.text blockquote,
+.text pre,
+.text ul,
+.text ol,
+.text dl,
+.text dir,
+.text hr {
+    font-size: var(--s0);
+}
+
+.text > * + h1,
+.text > * + h2,
+.text > * + h3,
+.text > * + h4 {
+    margin-top: var(--s3)
+}
+
+.text > * + * {
+    margin-top: var(--s0)
+}
+
+.text blockquote {
+    padding-left: 1rem;
+}
+
+.text pre {
+    outline: 1px solid var(--color-dark);
+    padding: 0.5rem;
+    background-color: var(--color-lightish);
+}
+
+.text ol, .text ul {
     padding-left: 1.875rem
 }
 
-ol {
-    list-style: decimal;
-}
 
-ul {
-    list-style: disc;
-}
-
-.title {
-    font-size: 1rem;
-}
-
-h2 {
-    font-size: 2.25rem;
-}
-
-h3 {
-    font-size: 1.3rem;
-}
-
-h4 {
-    font-size: 1.375rem;
-}
-
-p, img, blockquote, pre, ul, ol, dl, dir, hr {
-    font-size: 1rem;
-}
-
-@media only screen and (min-width: 48em) {
-    .title {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 3rem
-    }
-
-    h3 {
-        font-size: 1.75rem
-    }
-
-    h4 {
-        font-size: 1.5rem
-    }
-
-    p, img, blockquote, pre, ul, ol, dl, dir, hr {
-        font-size: 1.25rem;
-    }
-}
-
-@media only screen and (min-width: 78em) {
-    .title {
-        font-size: 3rem;
-    }
-
-    h2 {
-        font-size: 4.375rem
-    }
-
-    h3 {
-        font-size: 2.25rem
-    }
-
-    h4 {
-        font-size: 1.75rem
-    }
-
-    p, img, blockquote, pre, ul, ol, dl, dir, hr {
-        font-size: 1.25rem;
-    }
+.text code {
+    font-family: var(--font-mono);
 }

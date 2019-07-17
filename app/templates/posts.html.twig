@@ -3,8 +3,10 @@
 {% block body %}
     <ul class="posts">
         {% for post in page.posts %}
-            <li class="post">
-                {{ post.content | raw }}
+            <li>
+                <article class="post text">
+                    {{ post.content | raw }}
+                </article>
             </li>
         {% endfor %}
     </ul>
