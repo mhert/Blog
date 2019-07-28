@@ -8,7 +8,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pdo": "*",
-        "byjg/migration-cli": "4.0.*",
         "erusev/parsedown": "^1.7",
         "nyholm/psr7": "^1.1",
         "ramsey/uuid": "^3.8",

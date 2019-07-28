@@ -31,7 +31,7 @@ RUN apk add --no-cache tini && \
     apk del .deps
 
 COPY --from=0 /build /build
-RUN cp -r /build/bin /build/config /build/migrations /build/public /build/src /build/templates /build/.env /build/composer.json /build/composer.lock /build/symfony.lock /var/www/html/ && \
+RUN cp -r /build/bin /build/config /build/public /build/src /build/templates /build/.env /build/composer.json /build/composer.lock /build/symfony.lock /var/www/html/ && \
     rm -rf /build
 
 WORKDIR /var/www/html

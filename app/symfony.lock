@@ -1,28 +1,4 @@
 {
-    "byjg/anydataset": {
-        "version": "4.0.0"
-    },
-    "byjg/anydataset-array": {
-        "version": "4.0.0"
-    },
-    "byjg/anydataset-db": {
-        "version": "4.0.0"
-    },
-    "byjg/migration": {
-        "version": "4.0.2"
-    },
-    "byjg/migration-cli": {
-        "version": "4.0.1"
-    },
-    "byjg/serializer": {
-        "version": "1.0.7"
-    },
-    "byjg/uri": {
-        "version": "1.0.4"
-    },
-    "byjg/xmlutil": {
-        "version": "1.0.6"
-    },
     "composer/xdebug-handler": {
         "version": "1.3.2"
     },
