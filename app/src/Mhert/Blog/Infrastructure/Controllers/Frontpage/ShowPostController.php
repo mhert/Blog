@@ -5,10 +5,10 @@ declare(strict_types = 1);
 namespace Mhert\Blog\Infrastructure\Controllers\Frontpage;
 
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
+use Mhert\Blog\Domain\Frontpage\Post\Slug;
 use Mhert\Blog\Infrastructure\Views\PostViewHtml;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Ramsey\Uuid\Uuid;
 
 final class ShowPostController
 {
@@ -23,12 +23,12 @@ final class ShowPostController
         $this->postRepository = $postRepository;
     }
 
-    public function action(ServerRequestInterface $request, string $id): ResponseInterface
+    public function action(ServerRequestInterface $request, string $slug): ResponseInterface
     {
-        $id = Uuid::fromString($id);
+        $slug = new Slug($slug);
 
         return $this->view->render(
-            $this->postRepository->findPostById($id)
+            $this->postRepository->findPostBySlug($slug)
         );
     }
 }

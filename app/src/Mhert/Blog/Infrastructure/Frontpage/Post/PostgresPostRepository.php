@@ -10,6 +10,7 @@ use Mhert\Blog\Domain\Frontpage\Post\FactoryBasedPostList;
 use Mhert\Blog\Domain\Frontpage\Post\Post;
 use Mhert\Blog\Domain\Frontpage\Post\PostList;
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
+use Mhert\Blog\Domain\Frontpage\Post\Slug;
 use PDO;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -49,6 +50,18 @@ final class PostgresPostRepository implements PostRepository
         $statement = $this->db->prepare("SELECT * FROM posts WHERE id = :id;");
 
         $statement->bindValue(':id', $id->toString(), PDO::PARAM_STR);
+        $statement->execute();
+
+        $rawPost = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return self::postByResult($rawPost);
+    }
+
+    public function findPostBySlug(Slug $slug): Post
+    {
+        $statement = $this->db->prepare("SELECT * FROM posts WHERE slug = :slug;");
+
+        $statement->bindValue(':slug', $slug->toString(), PDO::PARAM_STR);
         $statement->execute();
 
         $rawPost = $statement->fetch(PDO::FETCH_ASSOC);

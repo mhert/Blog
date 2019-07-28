@@ -11,14 +11,21 @@ final class Post
 {
     /** @var UuidInterface */
     private $id;
+    /** @var Slug */
+    private $slug;
     /** @var DateTimeInterface */
     private $created;
     /** @var string */
     private $content;
 
-    public function __construct(UuidInterface $id, DateTimeInterface $created, string $content)
-    {
+    public function __construct(
+        UuidInterface $id,
+        Slug $slug,
+        DateTimeInterface $created,
+        string $content
+    ) {
         $this->id = $id;
+        $this->slug = $slug;
         $this->created = $created;
         $this->content = $content;
     }

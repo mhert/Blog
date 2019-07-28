@@ -10,7 +10,7 @@ posts:
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostsController::action
 
 post:
-  path: /posts/{id}
+  path: /posts/{slug}
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostController::action
 
 imprint-en:

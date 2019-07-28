@@ -19,6 +19,17 @@ final class InMemoryPostRepository implements PostRepository
     {
         return new Post(
             $id,
+            new Slug(''),
+            new DateTimeImmutable('now'),
+            ''
+        );
+    }
+
+    public function findPostBySlug(Slug $slug): Post
+    {
+        return new Post(
+            Uuid::uuid4(),
+            new Slug(''),
             new DateTimeImmutable('now'),
             ''
         );

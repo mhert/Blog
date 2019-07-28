@@ -11,4 +11,6 @@ interface PostRepository
     public function findPostsByOffset(int $offset, int $numberOfPosts): PostList;
 
     public function findPostById(UuidInterface $id): Post;
+
+    public function findPostBySlug(Slug $slug): Post;
 }
