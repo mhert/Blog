@@ -15,3 +15,8 @@ parameters:
         - %currentWorkingDirectory%/src/Mhert/Blog/Infrastructure/ParsedownMarkdownParser.php
 
     level: max
+
+    ignoreErrors:
+        -
+            message: '#Class "Mhert\\Blog\\Infrastructure\\Commands\\InitDbCommand" is not allowed to extend "Symfony\\Component\\Console\\Command\\Command".#'
+            path: %currentWorkingDirectory%/src/Mhert/Blog/Infrastructure/Commands/InitDbCommand.php

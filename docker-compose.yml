@@ -18,4 +18,32 @@ services:
       - ./app/:/var/www/html/
     environment:
       APP_ENV: dev
+      EB_APP_ENV: blog-dev
     user: 1000:1000
+    links:
+      - db
+
+  blog-app-init-db:
+    build:
+      context: .
+      dockerfile: docker/app-frontend-php/Dockerfile
+    command: ["/var/www/html/bin/console", "blog-app:init-db"]
+    volumes:
+      - ./app/:/var/www/html/
+      - ./.ebextensions/:/var/www/html/.ebextensions
+    environment:
+      APP_ENV: dev
+      EB_APP_ENV: blog-dev
+    user: 1000:1000
+    links:
+      - db
+    restart: "no"
+
+  db:
+    image: amazon/dynamodb-local
+    restart: always
+    volumes:
+      - dynamodb-blog:/dbstore
+
+volumes:
+  dynamodb-blog: ~
