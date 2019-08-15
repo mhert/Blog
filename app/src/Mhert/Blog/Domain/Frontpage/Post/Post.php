@@ -32,6 +32,6 @@ final class Post
 
     public function print(callable $printer): void
     {
-        $printer($this->id, $this->created, $this->content);
+        $printer($this->id, $this->slug, $this->created, $this->content);
     }
 }

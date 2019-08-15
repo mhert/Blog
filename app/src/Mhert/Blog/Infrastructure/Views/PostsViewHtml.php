@@ -6,6 +6,7 @@ namespace Mhert\Blog\Infrastructure\Views;
 
 use DateTimeInterface;
 use Mhert\Blog\Domain\Frontpage\Post\Post;
+use Mhert\Blog\Domain\Frontpage\Post\Slug;
 use Mhert\Blog\Infrastructure\ParsedownMarkdownParser;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -65,12 +66,15 @@ final class PostsViewHtml
             $post->print(
                 function (
                     UuidInterface $id,
+                    Slug $slug,
                     DateTimeInterface $created,
                     string $content
                 ) use (
                     &$result
                 ): void {
                     $result[] = [
+                        'id' => $id->toString(),
+                        'slug' => $slug->toString(),
                         'content' => $this->markdownParser->parse($content),
                         'created' => $created->format(DateTimeInterface::ATOM),
                     ];
