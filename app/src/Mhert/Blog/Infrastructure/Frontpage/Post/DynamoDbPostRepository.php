@@ -13,6 +13,7 @@ use Mhert\Blog\Domain\Frontpage\Post\Post;
 use Mhert\Blog\Domain\Frontpage\Post\PostList;
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
 use Mhert\Blog\Domain\Frontpage\Post\Slug;
+use Mhert\Blog\Infrastructure\DynamoDb\PostTableName;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
@@ -20,18 +21,18 @@ use function array_map;
 
 final class DynamoDbPostRepository implements PostRepository
 {
-    /** @var string */
-    private $ebAppEnv;
     /** @var DynamoDbClient */
     private $dynamoDbClient;
+    /** @var PostTableName */
+    private $tableName;
     /** @var Marshaler */
     private $marshaler;
 
     public function __construct(
-        string $ebAppEnv,
+        PostTableName $tableName,
         DynamoDbClient $dynamoDbClient
     ) {
-        $this->ebAppEnv = $ebAppEnv;
+        $this->tableName = $tableName;
         $this->dynamoDbClient = $dynamoDbClient;
         $this->marshaler = new Marshaler();
     }
@@ -39,7 +40,7 @@ final class DynamoDbPostRepository implements PostRepository
     public function findPostsByOffset(int $offset, int $numberOfPosts): PostList
     {
         $params = [
-            'TableName' => $this->tableName(),
+            'TableName' => $this->tableName->toString(),
         ];
 
         $result = $this->dynamoDbClient->scan($params)->toArray();
@@ -52,7 +53,7 @@ final class DynamoDbPostRepository implements PostRepository
     public function findPostById(UuidInterface $id): Post
     {
         $params = [
-            'TableName' => $this->tableName(),
+            'TableName' => $this->tableName->toString(),
             'ExpressionAttributeNames' => [
                 '#id' => 'id',
             ],
@@ -68,7 +69,7 @@ final class DynamoDbPostRepository implements PostRepository
     public function findPostBySlug(Slug $slug): Post
     {
         $params = [
-            'TableName' => $this->tableName(),
+            'TableName' => $this->tableName->toString(),
             'IndexName' => 'slug',
             'ExpressionAttributeNames' => [
                 '#slug' => 'slug',
@@ -102,10 +103,5 @@ final class DynamoDbPostRepository implements PostRepository
             $created,
             $content
         );
-    }
-
-    private function tableName(): string
-    {
-        return $this->ebAppEnv . '_Post';
     }
 }

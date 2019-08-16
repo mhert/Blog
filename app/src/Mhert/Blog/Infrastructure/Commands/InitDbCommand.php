@@ -5,35 +5,34 @@ declare(strict_types = 1);
 namespace Mhert\Blog\Infrastructure\Commands;
 
 use Aws\DynamoDb\DynamoDbClient;
+use Mhert\Blog\Infrastructure\DynamoDb\PostTableName;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Yaml\Yaml;
 use function file_get_contents;
-use function str_replace;
 
 final class InitDbCommand extends Command
 {
     /** @var string */
     protected static $defaultName = 'blog-app:init-db';
 
-    /** @var string */
-    private $ebAppEnv;
+    /** @var DynamoDbClient */
+    private $dynamoDbClient;
+    /** @var PostTableName */
+    private $tableName;
     /** @var ParameterBagInterface */
     private $params;
 
-    /** @var DynamoDbClient */
-    private $dynamoDbClient;
-
     public function __construct(
-        string $ebAppEnv,
+        PostTableName $tableName,
         ParameterBagInterface $params,
         DynamoDbClient $dynamoDbClient
     ) {
         parent::__construct();
 
-        $this->ebAppEnv = $ebAppEnv;
+        $this->tableName = $tableName;
         $this->params = $params;
         $this->dynamoDbClient = $dynamoDbClient;
     }
@@ -47,7 +46,7 @@ final class InitDbCommand extends Command
             return 1;
         }
 
-        $dynamodbConfigFile = str_replace('$EB_APP_ENV', $this->ebAppEnv, $dynamodbConfigFile);
+        $dynamodbConfigFile = $this->tableName->replace($dynamodbConfigFile);
         $postTableDefinition = Yaml::parse($dynamodbConfigFile)['Resources']['Post']['Properties'];
 
         $this->dynamoDbClient->createTable($postTableDefinition);

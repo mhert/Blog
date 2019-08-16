@@ -20,14 +20,16 @@ services:
                     key: 'fakeMyKeyId'
                     secret: 'fakeMyKeyId'
 
-    Mhert\Blog\Domain\Frontpage\Post\PostRepository:
-        class: Mhert\Blog\Infrastructure\Frontpage\Post\DynamoDbPostRepository
+    Mhert\Blog\Infrastructure\DynamoDb\PostTableName:
         arguments:
             $ebAppEnv: '%env(EB_APP_ENV)%'
 
+    Mhert\Blog\Domain\Frontpage\Post\PostRepository: '@Mhert\Blog\Infrastructure\Frontpage\Post\DynamoDbPostRepository'
+
     Mhert\Blog\:
         resource: '../src/Mhert/Blog/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude:
+            - '../src/Mhert/Blog/Infrastructure/DynamoDb/PostTableName.php'
 
     Mhert\Blog\Infrastructure\Controllers\:
         resource: '../src/Mhert/Blog/Infrastructure/Controllers'
@@ -35,11 +37,6 @@ services:
 
     Mhert\Blog\Infrastructure\Commands\:
         resource: '../src/Mhert/Blog/Infrastructure/Commands'
-        tags: ['console.command']
-
-    Mhert\Blog\Infrastructure\Commands\InitDbCommand:
-        arguments:
-            $ebAppEnv: '%env(EB_APP_ENV)%'
         tags: ['console.command']
 
     Parsedown:
