@@ -7,7 +7,7 @@ namespace Mhert\Blog\Infrastructure\Views;
 use DateTimeInterface;
 use Mhert\Blog\Domain\Frontpage\Post\Post;
 use Mhert\Blog\Domain\Frontpage\Post\Slug;
-use Mhert\Blog\Infrastructure\ParsedownMarkdownParser;
+use Mhert\Blog\Infrastructure\MarkdownParser\MarkdownParser;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -18,13 +18,13 @@ use Twig\Environment as TwigEnvironment;
 final class PostsViewHtml
 {
     private TwigEnvironment $twigEnvironment;
-    private ParsedownMarkdownParser $markdownParser;
+    private MarkdownParser $markdownParser;
     private ResponseFactoryInterface $responseFactory;
     private StreamFactoryInterface $streamFactory;
 
     public function __construct(
         TwigEnvironment $twigEnvironment,
-        ParsedownMarkdownParser $markdownParser,
+        MarkdownParser $markdownParser,
         ResponseFactoryInterface $responseFactory,
         StreamFactoryInterface $streamFactory
     ) {
