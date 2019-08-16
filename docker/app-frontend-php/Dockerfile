@@ -1,4 +1,4 @@
-FROM php:7.3.2-cli-alpine3.9
+FROM php:7.4.0beta2-cli-alpine3.10
 
 ADD https://raw.githubusercontent.com/composer/getcomposer.org/cb19f2aa3aeaa2006c0cd69a7ef011eb31463067/web/installer composer-installer
 RUN php composer-installer --install-dir=/usr/local/bin --filename=composer
@@ -16,7 +16,7 @@ RUN rm -rf var vendor && \
     bin/console cache:warmup --env=dev && \
     vendor/bin/phing check test
 
-FROM php:7.3.2-fpm-alpine3.9
+FROM php:7.4.0beta2-fpm-alpine3.10
 
 ADD https://raw.githubusercontent.com/composer/getcomposer.org/cb19f2aa3aeaa2006c0cd69a7ef011eb31463067/web/installer composer-installer
 RUN php composer-installer --install-dir=/usr/local/bin --filename=composer
@@ -26,8 +26,8 @@ CMD ["/usr/local/sbin/php-fpm"]
 
 RUN apk add --no-cache tini && \
     apk add --no-cache libzip postgresql-libs && \
-    apk add --no-cache --virtual .deps $PHPIZE_DEPS libzip-dev postgresql-dev && \
-    docker-php-ext-install -j$(nproc) opcache zip bcmath pdo_pgsql && \
+    apk add --no-cache --virtual .deps $PHPIZE_DEPS libzip-dev && \
+    docker-php-ext-install -j$(nproc) opcache zip bcmath && \
     apk del .deps
 
 COPY --from=0 /build /build

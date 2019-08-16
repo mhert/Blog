@@ -17,14 +17,10 @@ use Twig\Environment as TwigEnvironment;
 
 final class PostsViewHtml
 {
-    /** @var TwigEnvironment */
-    private $twigEnvironment;
-    /** @var ParsedownMarkdownParser */
-    private $markdownParser;
-    /** @var ResponseFactoryInterface */
-    private $responseFactory;
-    /** @var StreamFactoryInterface */
-    private $streamFactory;
+    private TwigEnvironment $twigEnvironment;
+    private ParsedownMarkdownParser $markdownParser;
+    private ResponseFactoryInterface $responseFactory;
+    private StreamFactoryInterface $streamFactory;
 
     public function __construct(
         TwigEnvironment $twigEnvironment,

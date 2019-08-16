@@ -13,12 +13,9 @@ use function sprintf;
 
 final class ImprintViewHtml
 {
-    /** @var TwigEnvironment */
-    private $twigEnvironment;
-    /** @var ResponseFactoryInterface */
-    private $responseFactory;
-    /** @var StreamFactoryInterface */
-    private $streamFactory;
+    private TwigEnvironment $twigEnvironment;
+    private ResponseFactoryInterface $responseFactory;
+    private StreamFactoryInterface $streamFactory;
 
     public function __construct(
         TwigEnvironment $twigEnvironment,

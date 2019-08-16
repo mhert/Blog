@@ -9,10 +9,9 @@ use function array_key_exists;
 
 final class ArrayBasedPostList implements Iterator, PostList
 {
-    /** @var int */
-    private $position = 0;
+    private int $position = 0;
     /** @var Post[] */
-    private $posts = [];
+    private array $posts = [];
 
     /**
      * @param Post[] $posts

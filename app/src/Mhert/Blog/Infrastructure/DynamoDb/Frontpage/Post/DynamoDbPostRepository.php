@@ -21,12 +21,9 @@ use function array_map;
 
 final class DynamoDbPostRepository implements PostRepository
 {
-    /** @var DynamoDbClient */
-    private $dynamoDbClient;
-    /** @var PostTableName */
-    private $tableName;
-    /** @var Marshaler */
-    private $marshaler;
+    private DynamoDbClient $dynamoDbClient;
+    private PostTableName $tableName;
+    private Marshaler $marshaler;
 
     public function __construct(
         PostTableName $tableName,

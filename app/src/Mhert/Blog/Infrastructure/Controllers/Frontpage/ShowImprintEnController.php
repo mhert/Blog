@@ -10,8 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class ShowImprintEnController
 {
-    /** @var ImprintViewHtml */
-    private $view;
+    private ImprintViewHtml $view;
 
     public function __construct(ImprintViewHtml $view)
     {

@@ -7,8 +7,7 @@ use function str_replace;
 
 final class PostTableName
 {
-    /** @var string */
-    private $ebAppEnv;
+    private string $ebAppEnv;
 
     public function __construct(string $ebAppEnv)
     {

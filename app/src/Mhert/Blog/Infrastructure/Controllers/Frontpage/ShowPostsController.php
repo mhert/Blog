@@ -11,10 +11,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class ShowPostsController
 {
-    /** @var PostsViewHtml */
-    private $view;
-    /** @var PostRepository */
-    private $postRepository;
+    private PostsViewHtml $view;
+    private PostRepository $postRepository;
 
     public function __construct(PostsViewHtml $view, PostRepository $postRepository)
     {

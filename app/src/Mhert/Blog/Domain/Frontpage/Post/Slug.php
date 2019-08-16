@@ -6,8 +6,7 @@ namespace Mhert\Blog\Domain\Frontpage\Post;
 
 final class Slug
 {
-    /** @var string */
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

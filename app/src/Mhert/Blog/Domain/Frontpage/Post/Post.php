@@ -9,14 +9,10 @@ use Ramsey\Uuid\UuidInterface;
 
 final class Post
 {
-    /** @var UuidInterface */
-    private $id;
-    /** @var Slug */
-    private $slug;
-    /** @var DateTimeInterface */
-    private $created;
-    /** @var string */
-    private $content;
+    private UuidInterface $id;
+    private Slug $slug;
+    private DateTimeInterface $created;
+    private string $content;
 
     public function __construct(
         UuidInterface $id,

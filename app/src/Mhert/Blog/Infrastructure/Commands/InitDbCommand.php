@@ -18,12 +18,9 @@ final class InitDbCommand extends Command
     /** @var string */
     protected static $defaultName = 'blog-app:init-db';
 
-    /** @var DynamoDbClient */
-    private $dynamoDbClient;
-    /** @var PostTableName */
-    private $tableName;
-    /** @var ParameterBagInterface */
-    private $params;
+    private DynamoDbClient $dynamoDbClient;
+    private PostTableName $tableName;
+    private ParameterBagInterface $params;
 
     public function __construct(
         PostTableName $tableName,
