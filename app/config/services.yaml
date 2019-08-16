@@ -24,7 +24,7 @@ services:
         arguments:
             $ebAppEnv: '%env(EB_APP_ENV)%'
 
-    Mhert\Blog\Domain\Frontpage\Post\PostRepository: '@Mhert\Blog\Infrastructure\Frontpage\Post\DynamoDbPostRepository'
+    Mhert\Blog\Domain\Frontpage\Post\PostRepository: '@Mhert\Blog\Infrastructure\DynamoDb\Frontpage\Post\DynamoDbPostRepository'
 
     Mhert\Blog\:
         resource: '../src/Mhert/Blog/*'

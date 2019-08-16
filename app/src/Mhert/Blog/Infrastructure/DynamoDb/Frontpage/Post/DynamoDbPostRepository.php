@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Mhert\Blog\Infrastructure\Frontpage\Post;
+namespace Mhert\Blog\Infrastructure\DynamoDb\Frontpage\Post;
 
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
