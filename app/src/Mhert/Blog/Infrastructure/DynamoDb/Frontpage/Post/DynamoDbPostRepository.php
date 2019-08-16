@@ -47,7 +47,7 @@ final class DynamoDbPostRepository implements PostRepository
         }, $result['Items']));
     }
 
-    public function findPostById(UuidInterface $id): Post
+    public function findPostById(UuidInterface $id): ?Post
     {
         $params = [
             'TableName' => $this->tableName->toString(),
@@ -60,10 +60,19 @@ final class DynamoDbPostRepository implements PostRepository
             'KeyConditionExpression' => '#id = :id'
         ];
         $result = $this->dynamoDbClient->query($params)->toArray();
+
+        if ($result['Count'] === 0) {
+            return null;
+        }
+
+        if ($result['Count'] > 1) {
+            throw new RuntimeException('Too many results');
+        }
+
         return self::postByResult($result['Items'][0]);
     }
 
-    public function findPostBySlug(Slug $slug): Post
+    public function findPostBySlug(Slug $slug): ?Post
     {
         $params = [
             'TableName' => $this->tableName->toString(),
@@ -77,6 +86,15 @@ final class DynamoDbPostRepository implements PostRepository
             'KeyConditionExpression' => '#slug = :slug'
         ];
         $result = $this->dynamoDbClient->query($params)->toArray();
+
+        if ($result['Count'] === 0) {
+            return null;
+        }
+
+        if ($result['Count'] > 1) {
+            throw new RuntimeException('Too many results');
+        }
+
         return self::postByResult($result['Items'][0]);
     }
 
@@ -87,7 +105,7 @@ final class DynamoDbPostRepository implements PostRepository
     {
         $id = Uuid::fromInteger($rawPost['id']['N']);
         $slug = new Slug($rawPost['slug']['S']);
-        $created = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $rawPost['created']['S']);
+        $created = DateTimeImmutable::createFromFormat(DateTimeImmutable::ATOM, $rawPost['created']['S']);
         $content = $rawPost['content']['S'];
 
         if (!$created instanceof DateTimeInterface) {
