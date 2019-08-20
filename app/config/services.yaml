@@ -26,6 +26,7 @@ services:
 
     Mhert\Blog\Domain\Frontpage\Post\PostRepository: '@Mhert\Blog\Infrastructure\DynamoDb\Frontpage\Post\DynamoDbPostRepository'
 
+    #Mhert\Blog\Infrastructure\MarkdownParser\MarkdownParser: '@Mhert\Blog\Infrastructure\MarkdownParser\MichelfParsedown\MichelfParsedownMarkdownParser'
     Mhert\Blog\Infrastructure\MarkdownParser\MarkdownParser: '@Mhert\Blog\Infrastructure\MarkdownParser\Parsedown\ParsedownMarkdownParser'
 
     Mhert\Blog\:

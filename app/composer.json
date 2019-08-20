@@ -10,6 +10,7 @@
         "ext-pdo": "*",
         "aws/aws-sdk-php": "^3.108",
         "erusev/parsedown": "^1.7",
+        "michelf/php-markdown": "^1.8",
         "moontoast/math": "^1.1",
         "nyholm/psr7": "^1.1",
         "ramsey/uuid": "^3.8",
