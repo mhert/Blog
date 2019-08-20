@@ -85,30 +85,43 @@ footer, header, main, nav, pre {
 
 :root {
     line-height: var(--line-height);
-    font-size: calc(.333vw + 1em);
+    font-size: calc(.333vh + 1em);
     font-family: var(--font-plain);
     background-color: var(--color-light);
-    color: var(--color-dark)
+    color: var(--color-dark);
 }
 
 /** Layout **/
 
-body {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-}
-
 header {
-    flex-basis: 15rem;
-    flex-grow: 1;
     padding: var(--s3);
 }
 
 main {
-    flex-basis: 0;
-    flex-grow: 999;
     padding: var(--s3);
+}
+
+@media (min-width: 1280px) {
+    body {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+    }
+
+    header {
+        flex-basis: 15rem;
+        flex-grow: 1;
+    }
+
+    main {
+        flex-basis: 0;
+        flex-grow: 999;
+    }
+
+    main > * {
+        max-width: 70rem;
+        margin: auto;
+    }
 }
 
 .nav-items {
@@ -201,6 +214,7 @@ main {
     outline: 1px solid var(--color-dark);
     padding: 0.5rem;
     background-color: var(--color-lightish);
+    white-space: pre-wrap;
 }
 
 .text ol, .text ul {
