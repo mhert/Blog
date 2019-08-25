@@ -18,5 +18,8 @@ parameters:
 
     ignoreErrors:
         -
+            message: '#(.*)has a nullable return type declaration.#'
+            path: %currentWorkingDirectory%/src/Mhert/Blog
+        -
             message: '#Class "Mhert\\Blog\\Infrastructure\\Commands\\InitDbCommand" is not allowed to extend "Symfony\\Component\\Console\\Command\\Command".#'
             path: %currentWorkingDirectory%/src/Mhert/Blog/Infrastructure/Commands/InitDbCommand.php

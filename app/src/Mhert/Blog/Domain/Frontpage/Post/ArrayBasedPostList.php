@@ -28,6 +28,11 @@ final class ArrayBasedPostList implements Iterator, PostList
         $this->posts[] = $post;
     }
 
+    public function render(PostListRenderer $renderer): string
+    {
+        return $renderer->render($this);
+    }
+
     public function current(): Post
     {
         return $this->posts[$this->position];

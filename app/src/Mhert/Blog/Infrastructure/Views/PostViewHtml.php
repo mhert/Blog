@@ -4,72 +4,44 @@ declare(strict_types = 1);
 
 namespace Mhert\Blog\Infrastructure\Views;
 
-use DateTimeInterface;
 use Mhert\Blog\Domain\Frontpage\Post\Post;
-use Mhert\Blog\Domain\Frontpage\Post\Slug;
-use Mhert\Blog\Infrastructure\MarkdownParser\MarkdownParser;
+use Mhert\Blog\Domain\Frontpage\Post\PostRenderer;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
-use Ramsey\Uuid\UuidInterface;
 use Teapot\StatusCode\Http;
 use Twig\Environment as TwigEnvironment;
 
 final class PostViewHtml
 {
-    private TwigEnvironment $twigEnvironment;
-    private MarkdownParser $markdownParser;
     private ResponseFactoryInterface $responseFactory;
     private StreamFactoryInterface $streamFactory;
+    private TwigEnvironment $twig;
+    private PostRenderer $postRenderer;
 
     public function __construct(
-        TwigEnvironment $twigEnvironment,
-        MarkdownParser $markdownParser,
         ResponseFactoryInterface $responseFactory,
-        StreamFactoryInterface $streamFactory
+        StreamFactoryInterface $streamFactory,
+        TwigEnvironment $twig,
+        PostRenderer $postRenderer
     ) {
-        $this->twigEnvironment = $twigEnvironment;
-        $this->markdownParser = $markdownParser;
         $this->responseFactory = $responseFactory;
         $this->streamFactory = $streamFactory;
+        $this->twig = $twig;
+        $this->postRenderer = $postRenderer;
     }
 
     public function render(Post $post): ResponseInterface
     {
-        $page = [
-            'post' => $this->adjustPost($post)
-        ];
-
         return $this->responseFactory
             ->createResponse(Http::OK)
-            ->withBody($this->streamFactory->createStream(
-                $this->twigEnvironment->render('post.html.twig', ['page' => $page])
-            ));
-    }
-
-    /**
-     * @return mixed[]
-     */
-    private function adjustPost(Post $post): array
-    {
-        $result = [];
-
-        $post->print(
-            function (
-                UuidInterface $id,
-                Slug $slug,
-                DateTimeInterface $created,
-                string $content
-            ) use (
-                &$result
-            ): void {
-                $result = [
-                    'content' => $this->markdownParser->parse($content),
-                    'created' => $created->format(DateTimeInterface::ATOM),
-                ];
-            }
-        );
-
-        return $result;
+            ->withBody(
+                $this->streamFactory->createStream(
+                    $this->twig->render(
+                        'base.html.twig',
+                        ['body' => $post->render($this->postRenderer)]
+                    )
+                )
+            );
     }
 }

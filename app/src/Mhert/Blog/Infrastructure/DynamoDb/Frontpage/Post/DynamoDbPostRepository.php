@@ -6,16 +6,15 @@ namespace Mhert\Blog\Infrastructure\DynamoDb\Frontpage\Post;
 
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
-use DateTimeImmutable;
-use DateTimeInterface;
 use Mhert\Blog\Domain\Frontpage\Post\ArrayBasedPostList;
 use Mhert\Blog\Domain\Frontpage\Post\Post;
+use Mhert\Blog\Domain\Frontpage\Post\PostContent;
+use Mhert\Blog\Domain\Frontpage\Post\PostCreated;
+use Mhert\Blog\Domain\Frontpage\Post\PostId;
 use Mhert\Blog\Domain\Frontpage\Post\PostList;
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
-use Mhert\Blog\Domain\Frontpage\Post\Slug;
+use Mhert\Blog\Domain\Frontpage\Post\PostSlug;
 use Mhert\Blog\Infrastructure\DynamoDb\PostTableName;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
 use function array_map;
 
@@ -47,7 +46,7 @@ final class DynamoDbPostRepository implements PostRepository
         }, $result['Items']));
     }
 
-    public function findPostById(UuidInterface $id): ?Post
+    public function findPostById(PostId $id): ?Post
     {
         $params = [
             'TableName' => $this->tableName->toString(),
@@ -55,7 +54,7 @@ final class DynamoDbPostRepository implements PostRepository
                 '#id' => 'id',
             ],
             'ExpressionAttributeValues' => $this->marshaler->marshalItem([
-                ':id' => $this->marshaler->number($id->getInteger()),
+                ':id' => $this->marshaler->number($id->toNumeric()),
             ]),
             'KeyConditionExpression' => '#id = :id'
         ];
@@ -72,7 +71,7 @@ final class DynamoDbPostRepository implements PostRepository
         return self::postByResult($result['Items'][0]);
     }
 
-    public function findPostBySlug(Slug $slug): ?Post
+    public function findPostBySlug(PostSlug $slug): ?Post
     {
         $params = [
             'TableName' => $this->tableName->toString(),
@@ -103,14 +102,10 @@ final class DynamoDbPostRepository implements PostRepository
      */
     private static function postByResult(array $rawPost): Post
     {
-        $id = Uuid::fromInteger($rawPost['id']['N']);
-        $slug = new Slug($rawPost['slug']['S']);
-        $created = DateTimeImmutable::createFromFormat(DateTimeImmutable::ATOM, $rawPost['created']['S']);
-        $content = $rawPost['content']['S'];
-
-        if (!$created instanceof DateTimeInterface) {
-            throw new RuntimeException('Could not parse created date');
-        }
+        $id = PostId::fromNumeric($rawPost['id']['N']);
+        $slug = PostSlug::fromString($rawPost['slug']['S']);
+        $created = PostCreated::fromString($rawPost['created']['S']);
+        $content = PostContent::fromString($rawPost['content']['S']);
 
         return new Post(
             $id,

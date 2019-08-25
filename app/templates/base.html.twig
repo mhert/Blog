@@ -16,7 +16,7 @@
             </nav>
         </header>
         <main>
-            {% block body %}{% endblock %}
+            {{ body | raw }}
         </main>
         <script src="{{ asset('app.js', 'js') }}" type="application/ecmascript"></script>
     </body>

@@ -8,4 +8,5 @@ use Traversable;
 
 interface PostList extends Traversable
 {
+    public function render(PostListRenderer $renderer): string;
 }

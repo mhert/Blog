@@ -17,6 +17,11 @@ final class FactoryBasedPostList implements IteratorAggregate, PostList
         $this->postFactory = $postFactory;
     }
 
+    public function render(PostListRenderer $renderer): string
+    {
+        return $renderer->render($this);
+    }
+
     public function getIterator(): Generator
     {
         while ($post = ($this->postFactory)()) {

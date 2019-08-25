@@ -4,21 +4,18 @@ declare(strict_types = 1);
 
 namespace Mhert\Blog\Domain\Frontpage\Post;
 
-use DateTimeInterface;
-use Ramsey\Uuid\UuidInterface;
-
 final class Post
 {
-    private UuidInterface $id;
-    private Slug $slug;
-    private DateTimeInterface $created;
-    private string $content;
+    private PostId $id;
+    private PostSlug $slug;
+    private PostCreated $created;
+    private PostContent $content;
 
     public function __construct(
-        UuidInterface $id,
-        Slug $slug,
-        DateTimeInterface $created,
-        string $content
+        PostId $id,
+        PostSlug $slug,
+        PostCreated $created,
+        PostContent $content
     ) {
         $this->id = $id;
         $this->slug = $slug;
@@ -26,8 +23,13 @@ final class Post
         $this->content = $content;
     }
 
-    public function print(callable $printer): void
+    public function render(PostRenderer $renderer): string
     {
-        $printer($this->id, $this->slug, $this->created, $this->content);
+        return $renderer->render(
+            $this->id,
+            $this->slug,
+            $this->created,
+            $this->content,
+        );
     }
 }
