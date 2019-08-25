@@ -16,9 +16,10 @@ services:
       dockerfile: docker/app-frontend-php/Dockerfile
     volumes:
       - ./app/:/var/www/html/
+      - ./.ebextensions/:/var/www/html/.ebextensions
     environment:
       APP_ENV: dev
-      EB_APP_ENV: blog-dev
+      EB_ENV: blog-dev
     user: 1000:1000
     links:
       - db
@@ -33,7 +34,7 @@ services:
       - ./.ebextensions/:/var/www/html/.ebextensions
     environment:
       APP_ENV: dev
-      EB_APP_ENV: blog-dev
+      EB_ENV: blog-dev
     user: 1000:1000
     links:
       - db

@@ -22,7 +22,7 @@ services:
 
     Mhert\Blog\Infrastructure\DynamoDb\PostTableName:
         arguments:
-            $ebAppEnv: '%env(EB_APP_ENV)%'
+            $ebAppEnv: '%env(EB_ENV)%'
 
     Mhert\Blog\Domain\Frontpage\Post\PostRepository: '@Mhert\Blog\Infrastructure\DynamoDb\Frontpage\Post\DynamoDbPostRepository'
 

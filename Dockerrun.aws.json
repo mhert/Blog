@@ -37,25 +37,8 @@
         }
       ],
       "environment" : [
-        { "name" : "APP_ENV", "value" : "prod" }
-      ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/blog",
-          "awslogs-region": "eu-central-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      }
-    },
-    {
-      "name": "blog-app-db-migrations",
-      "image": "489249879193.dkr.ecr.eu-central-1.amazonaws.com/blog-app-frontend-php:latest",
-      "essential": false,
-      "memory": 128,
-      "command": ["/var/www/html/bin/migrate"],
-      "environment" : [
-        { "name" : "APP_ENV", "value" : "prod" }
+        { "name" : "APP_ENV", "value" : "prod" },
+        { "name" : "EB_ENV", "value" : "blog_dev" }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",

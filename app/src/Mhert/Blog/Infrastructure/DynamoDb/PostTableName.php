@@ -7,6 +7,7 @@ use function str_replace;
 
 final class PostTableName
 {
+    const ENVIRONMENT_VARIABLE_NAME = '`{ "Ref" : "AWSEBEnvironmentName" }`';
     private string $ebAppEnv;
 
     public function __construct(string $ebAppEnv)
@@ -16,11 +17,11 @@ final class PostTableName
 
     public function replace(string $str): string
     {
-        return str_replace('$EB_APP_ENV', $this->ebAppEnv, $str);
+        return str_replace(self::ENVIRONMENT_VARIABLE_NAME, $this->ebAppEnv, $str);
     }
 
     public function toString(): string
     {
-        return $this->replace('$EB_APP_ENV_Post');
+        return sprintf('%s_Post', $this->ebAppEnv);
     }
 }
