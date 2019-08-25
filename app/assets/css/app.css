@@ -167,6 +167,10 @@ main {
 
 /** Style .text **/
 
+.text h1 a {
+    text-decoration: none;
+}
+
 .text h1 {
     font-size: var(--s4);
 }

@@ -14,6 +14,7 @@ use Mhert\Blog\Domain\Frontpage\Post\PostId;
 use Mhert\Blog\Domain\Frontpage\Post\PostList;
 use Mhert\Blog\Domain\Frontpage\Post\PostRepository;
 use Mhert\Blog\Domain\Frontpage\Post\PostSlug;
+use Mhert\Blog\Domain\Frontpage\Post\PostTitle;
 use Mhert\Blog\Infrastructure\DynamoDb\PostTableName;
 use RuntimeException;
 use function array_map;
@@ -105,12 +106,14 @@ final class DynamoDbPostRepository implements PostRepository
         $id = PostId::fromNumeric($rawPost['id']['N']);
         $slug = PostSlug::fromString($rawPost['slug']['S']);
         $created = PostCreated::fromString($rawPost['created']['S']);
+        $headline = PostTitle::fromString($rawPost['title']['S']);
         $content = PostContent::fromString($rawPost['content']['S']);
 
         return new Post(
             $id,
             $slug,
             $created,
+            $headline,
             $content
         );
     }

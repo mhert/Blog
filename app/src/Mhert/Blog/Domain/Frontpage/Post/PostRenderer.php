@@ -10,6 +10,7 @@ interface PostRenderer
         PostId $id,
         PostSlug $slug,
         PostCreated $created,
+        PostTitle $title,
         PostContent $content
     ): string;
 }
