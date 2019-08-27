@@ -20,6 +20,8 @@ services:
     environment:
       APP_ENV: dev
       EB_ENV: blog-dev
+      DYNAMODB_REGION: 'eu-central-1'
+      DYNAMODB_ENDPOINT: 'http://db:8000'
     user: 1000:1000
     links:
       - db
@@ -35,6 +37,7 @@ services:
     environment:
       APP_ENV: dev
       EB_ENV: blog-dev
+      DYNAMODB_REGION: 'eu-central-1'
     user: 1000:1000
     links:
       - db

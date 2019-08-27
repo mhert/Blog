@@ -36,10 +36,6 @@
           "protocol": "tcp"
         }
       ],
-      "environment" : [
-        { "name" : "APP_ENV", "value" : "prod" },
-        { "name" : "EB_ENV", "value" : "blog_dev" }
-      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {

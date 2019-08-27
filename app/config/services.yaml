@@ -13,12 +13,8 @@ services:
     Aws\DynamoDb\DynamoDbClient:
         arguments:
             $args:
-                endpoint: 'http://db:8000'
-                region: 'us-west-2'
+                region: '%env(DYNAMODB_REGION)%'
                 version: 'latest'
-                credentials:
-                    key: 'fakeMyKeyId'
-                    secret: 'fakeMyKeyId'
 
     Mhert\Blog\Infrastructure\DynamoDb\PostTableName:
         arguments:
