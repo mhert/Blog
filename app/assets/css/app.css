@@ -120,12 +120,17 @@ main {
     main {
         flex-basis: 0;
         flex-grow: 999;
-        padding-top: 0;
     }
 
     main > * {
         max-width: 70rem;
         margin: auto;
+    }
+}
+
+@media (max-width: 1280px) {
+    main {
+        padding-top: 0;
     }
 }
 
