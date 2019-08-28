@@ -66,6 +66,10 @@ footer, header, main, nav, pre {
     display: block
 }
 
+address {
+    font-style: normal;
+}
+
 @media (prefers-reduced-motion: no-preference) {
     :root {
         scroll-behavior: smooth

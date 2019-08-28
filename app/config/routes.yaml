@@ -13,10 +13,6 @@ post:
   path: /posts/{slug}
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostController::action
 
-imprint-en:
+imprint:
   path: /imprint
-  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowImprintEnController::action
-
-imprint-de:
-  path: /impressum
-  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowImprintDeController::action
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowImprintController::action

@@ -8,7 +8,7 @@ use Mhert\Blog\Infrastructure\Views\ImprintViewHtml;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class ShowImprintEnController
+final class ShowImprintController
 {
     private ImprintViewHtml $view;
 
@@ -18,6 +18,6 @@ final class ShowImprintEnController
     }
     public function action(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->view->render('en');
+        return $this->view->render();
     }
 }
