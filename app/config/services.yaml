@@ -12,9 +12,7 @@ services:
 
     Aws\DynamoDb\DynamoDbClient:
         arguments:
-            $args:
-                region: '%env(DYNAMODB_REGION)%'
-                version: 'latest'
+            $args: '%env(json:DYNAMODB_CLIENT_ARGS)%'
 
     Mhert\Blog\Infrastructure\DynamoDb\PostTableName:
         arguments:
