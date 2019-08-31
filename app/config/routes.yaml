@@ -1,18 +1,11 @@
-index:
-  path: /
-  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-  defaults:
-    path: /posts
-    permanent: true
-
-posts:
-  path: /posts
-  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostsController::action
-
-post:
-  path: /posts/{slug}
-  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostController::action
-
 imprint:
   path: /imprint
   controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowImprintController::action
+
+post:
+  path: /{slug}
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostController::action
+
+posts:
+  path: /
+  controller: Mhert\Blog\Infrastructure\Controllers\Frontpage\ShowPostsController::action
