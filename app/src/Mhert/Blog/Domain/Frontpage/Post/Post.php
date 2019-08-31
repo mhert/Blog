@@ -36,4 +36,10 @@ final class Post
             $this->content,
         );
     }
+
+    /** @deprecated  */
+    public function title(): PostTitle
+    {
+        return $this->title;
+    }
 }

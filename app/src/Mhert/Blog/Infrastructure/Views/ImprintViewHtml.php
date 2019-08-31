@@ -36,7 +36,10 @@ final class ImprintViewHtml
                 $this->streamFactory->createStream(
                     $this->twig->render(
                         'base.html.twig',
-                        ['body' => $this->twig->render('views/imprint.html.twig')]
+                        [
+                            'body' => $this->twig->render('views/imprint.html.twig'),
+                            'title' => ' - Imprint',
+                        ]
                     )
                 )
             );

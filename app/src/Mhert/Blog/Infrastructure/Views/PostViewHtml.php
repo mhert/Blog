@@ -39,7 +39,10 @@ final class PostViewHtml
                 $this->streamFactory->createStream(
                     $this->twig->render(
                         'base.html.twig',
-                        ['body' => $post->render($this->postRenderer)]
+                        [
+                            'body' => $post->render($this->postRenderer),
+                            'title' => ' - ' . $post->title()->toString(),
+                        ]
                     )
                 )
             );
